@@ -1,0 +1,17 @@
+
+#server port
+server:
+  port: 3434
+
+#datasource properties
+spring:
+  datasource:
+     url : jdbc:mysql://localhost:3306/jrtp
+     username: root
+     password: root
+     driver-class-name: com.mysql.jdbc.Driver
+     dialect: org.hibernate.dialect.MySQL8Dialect
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
