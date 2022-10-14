@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.arservice.binding.CitizenInfo;
 import com.arservice.entity.CitizenDetailsEntity;
@@ -23,9 +24,18 @@ public class CitizenServiceImpl implements CitizenService {
 		String endpointurl  = "https://ssa-web-api.herokuapp.com/ssn/{ssn}";
 		
 	     //creating RestTemplate in order to make the rest call
-		RestTemplate rt = new RestTemplate();
+		/*RestTemplate rt = new RestTemplate();
 		ResponseEntity<String> response = rt.getForEntity(endpointurl, String.class, cinfo.getSsn());
-		String stateName = response.getBody();
+		String stateName = response.getBody();*/
+		
+		//making rest call using web client
+		
+		 WebClient webClient = WebClient.create();
+		 String stateName  =     webClient.get()
+		                                     .uri(endpointurl, cinfo.getSsn())
+		                                     .retrieve()
+		                                     .bodyToMono(String.class)
+		                                     .block();
 		//if citizen belongs to New Jersey then save the record otherwise don't save the record
 		//in endpoint url ssn number start with 6 series belongs to New Jersey
 		if(stateName.equalsIgnoreCase("New Jersey")) {
