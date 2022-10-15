@@ -21,7 +21,7 @@ public class CitizenDetailsEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer citizenId;
+	private Integer appId;
 	
 	private String fullName;
 	
