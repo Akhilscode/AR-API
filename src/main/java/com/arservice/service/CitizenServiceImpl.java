@@ -47,7 +47,7 @@ public class CitizenServiceImpl implements CitizenService {
 			
 			CitizenDetailsEntity save = crepo.save(centity);
 			
-			return save.getCitizenId();
+			return save.getAppId();
 		}
 		
 		
